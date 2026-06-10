@@ -427,4 +427,10 @@ app.add_handler(CommandHandler("start", start))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
 print("Bot started...")
-app.run_polling()
+
+async def bot():
+    await app.initialize()
+    await app.start()
+    await app.updater.start_polling()
+
+asyncio.run(bot())
